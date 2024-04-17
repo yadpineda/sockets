@@ -34,20 +34,20 @@ def execute_query(query):
 
 print("Socket server is listening for connections...")
 
-while True:
+while True: # configuro los sockets esperando las conexiones desde el cliente
 	client_socket, client_address = server_socket.accept()
 	print(f"Accepted connection from {client_address}")
-	#client_socket.sendall(b"Welcome to the server!")
 	data = client_socket.recv(1024)
 	received_data = data.decode()
 	params = received_data.split('&')
+	# recibo el numero de telefono desde el cliente
 	telefono = None
 	for param in params:
 		key, value = param.split('=')
 		if key == 'telefono':
 			telefono = value
 			break
-
+	# si existe un numero de telefono realizo la consulta a la base de datos y le muestro los datos al cliente
 	if telefono is not None:
 		resultsQuery = execute_query(f"SELECT personas.*, ciud_nombre FROM personas LEFT JOIN ciudades ON personas.dir_ciud_id = ciudades.ciud_id WHERE dir_tel = '{telefono}'")
 		client_socket.sendall(b"Persona encontrada: ")
