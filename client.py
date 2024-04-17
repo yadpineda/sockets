@@ -1,7 +1,7 @@
 import socket
-
+# le pido el telefono al cliente
 telefono = input("Indique el numero de telefono: ")
-
+#envio el telefono
 parameters = f"telefono={telefono}"
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
