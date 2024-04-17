@@ -1,2 +1,2 @@
 # sockets
-taller de sockets en python
+taller de sockets en python.
